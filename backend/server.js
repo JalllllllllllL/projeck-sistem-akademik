@@ -22,6 +22,11 @@ app.use('/api/ranking', rankingRoutes);
 
 app.get('/api/ping', (req, res) => res.json({ message: 'pong' }));
 
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true
+}));
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(err.status || 500).json({ error: err.message || 'Server error' });
